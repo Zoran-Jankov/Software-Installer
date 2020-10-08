@@ -29,7 +29,8 @@ public class InstallerManager
 	{
 		try
 		{
-			Ini setttings = new Ini(new File("/path/to/file"));
+			Ini setttings = new Ini(new File("D:/Programing\\Java\\Software Installer/src/main/resources/settings.ini"));
+			System.out.println(setttings.get("Arguments", "CCleaner"));
 		}
 		catch (IOException e)
 		{
