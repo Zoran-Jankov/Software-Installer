@@ -1,10 +1,6 @@
 package com.zoran_jankov.software_installer.app;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.Map;
-
-import org.ini4j.Ini;
 
 public class InstallerManager
 {
@@ -13,7 +9,7 @@ public class InstallerManager
 	
 	private InstallerManager()
 	{
-		arguments = getArguments();
+		
 	}
 	
 	public static InstallerManager getInstance()
@@ -23,20 +19,6 @@ public class InstallerManager
 			instance = new InstallerManager();
 		}
 	    return instance;
-	}
-	
-	private Map<Software, String> getArguments()
-	{
-		try
-		{
-			Ini setttings = new Ini(new File("D:/Programing\\Java\\Software Installer/src/main/resources/settings.ini"));
-			System.out.println(setttings.get("Arguments", "CCleaner"));
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-		return arguments;
 	}
 	
 	private void install(Software software)
