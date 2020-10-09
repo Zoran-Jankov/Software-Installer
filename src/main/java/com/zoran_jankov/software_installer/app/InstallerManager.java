@@ -1,11 +1,11 @@
 package com.zoran_jankov.software_installer.app;
 
+import java.io.IOException;
 import java.util.Map;
 
 public class InstallerManager
 {
 	private static InstallerManager instance;
-	private Map<Software, String> arguments;
 	
 	private InstallerManager()
 	{
@@ -21,9 +21,17 @@ public class InstallerManager
 	    return instance;
 	}
 	
-	private void install(Software software)
+	public void install(Software software)
 	{
-		//TODO Install implementation
+		try
+		{
+			new ProcessBuilder(Settings.getInstance().getLocalRepository(software), 
+							   Settings.getInstance().getArguments(software)).start();							 
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	public void startInstallation(Map<Software, Boolean> softwareList)

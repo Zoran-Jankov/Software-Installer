@@ -34,55 +34,37 @@ public class Settings
 	
 	public void loadSettings()
 	{
+		Ini settings = null;
+		
 		try
 		{
-			Ini setttings = new Ini(new File(SETTINGS_FILE_PATH));
+			settings = new Ini(new File(SETTINGS_FILE_PATH));
 		}
 		catch (IOException e)
 		{
 			e.printStackTrace();
 		}
+		
+		localRepositories = getInstallerSettings(settings, "Local Repositories");
+			
+		networkRepositories = getInstallerSettings(settings, "Network Repositories");
+				
+		onlineRepositories = getInstallerSettings(settings, "Online Repositories");
+				
+		arguments = getInstallerSettings(settings, "Arguments");
+
 	}
 	
-	private void load(Ini setttings, SettingsSection section)
+	private Map<Software, String> getInstallerSettings(Ini setttings, String sectionName)
 	{
-		Map<Software, String> list;
-		String sectionName;
+		Map<Software, String> list = new HashMap<Software, String>();
 		
-		switch(section)
+		for (Software installer : Software.values())
 		{
-			case LocalRepositories:
-			{
-				list = localRepositories;
-				sectionName = "Local Repositories";
-				break;
-			}
-			case NetworkRepositories:
-			{
-				list = networkRepositories;
-				sectionName = "NetworkRepositories";
-				break;
-			}
-			case OnlineRepositories:
-			{
-				list = onlineRepositories;
-				sectionName = "OnlineRepositories";
-				break;
-			}
-			case Arguments:
-			{
-				list = arguments;
-				sectionName = "arguments";
-				break;
-			}
-			default:
-				throw new IllegalArgumentException("Unexpected value: " + section);
+			list.put(installer, setttings.get(sectionName, installer.name()));
 		}
 		
-		for (Map.Entry<Software, String> application : list.entrySet())
-		{
-			application.setValue(setttings.get(sectionName, application.getKey().name()));
-		}
+		return list;
 	}
 	
 	public String getLocalRepository(Software software)
@@ -92,16 +74,16 @@ public class Settings
 	
 	public String getNetworkRepository(Software software)
 	{
-		return localRepositories.get(software);
+		return networkRepositories.get(software);
 	}
 	
 	public String getOnlineRepository(Software software)
 	{
-		return localRepositories.get(software);
+		return onlineRepositories.get(software);
 	}
 	
 	public String getArguments(Software software)
 	{
-		return localRepositories.get(software);
+		return arguments.get(software);
 	}
 }
