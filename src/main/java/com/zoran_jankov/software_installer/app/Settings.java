@@ -44,8 +44,64 @@ public class Settings
 		}
 	}
 	
-	private void load(Ini setttings)
+	private void load(Ini setttings, SettingsSection section)
 	{
+		Map<Software, String> list;
+		String sectionName;
 		
+		switch(section)
+		{
+			case LocalRepositories:
+			{
+				list = localRepositories;
+				sectionName = "Local Repositories";
+				break;
+			}
+			case NetworkRepositories:
+			{
+				list = networkRepositories;
+				sectionName = "NetworkRepositories";
+				break;
+			}
+			case OnlineRepositories:
+			{
+				list = onlineRepositories;
+				sectionName = "OnlineRepositories";
+				break;
+			}
+			case Arguments:
+			{
+				list = arguments;
+				sectionName = "arguments";
+				break;
+			}
+			default:
+				throw new IllegalArgumentException("Unexpected value: " + section);
+		}
+		
+		for (Map.Entry<Software, String> application : list.entrySet())
+		{
+			application.setValue(setttings.get(sectionName, application.getKey().name()));
+		}
+	}
+	
+	public String getLocalRepository(Software software)
+	{
+		return localRepositories.get(software);
+	}
+	
+	public String getNetworkRepository(Software software)
+	{
+		return localRepositories.get(software);
+	}
+	
+	public String getOnlineRepository(Software software)
+	{
+		return localRepositories.get(software);
+	}
+	
+	public String getArguments(Software software)
+	{
+		return localRepositories.get(software);
 	}
 }
