@@ -21,7 +21,7 @@ public class InstallerManager
 	    return instance;
 	}
 	
-	public void install(Software software)
+	private void install(Software software)
 	{
 		try
 		{
