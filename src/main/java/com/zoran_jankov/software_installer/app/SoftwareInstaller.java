@@ -4,6 +4,6 @@ public class SoftwareInstaller
 {
 	public static void main(String[] args)
 	{	
-		InstallerManager.getInstance().install(Software.CCleaner);
+		
 	}
 }
