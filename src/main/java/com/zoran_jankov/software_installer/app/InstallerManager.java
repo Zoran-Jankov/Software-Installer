@@ -25,8 +25,8 @@ public class InstallerManager
 	{
 		try
 		{
-			new ProcessBuilder(Settings.getInstance().getLocalRepository(software), 
-							   Settings.getInstance().getArguments(software)).start();							 
+			new ProcessBuilder(SettingsManager.getInstance().getLocalRepository(software), 
+							   SettingsManager.getInstance().getArguments(software)).start();							 
 		}
 		catch (IOException e)
 		{

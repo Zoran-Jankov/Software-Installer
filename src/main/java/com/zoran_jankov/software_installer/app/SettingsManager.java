@@ -7,9 +7,9 @@ import java.util.Map;
 
 import org.ini4j.Ini;
 
-public class Settings
+public class SettingsManager
 {
-	private static Settings instance;
+	private static SettingsManager instance;
 	
 	private static final String SETTINGS_FILE_PATH = "D:/Programing/Java/Software Installer/src/main/resources/Settings.ini";
 	
@@ -18,16 +18,16 @@ public class Settings
 	private Map<Software, String> onlineRepositories = new HashMap<Software, String>();
 	private Map<Software, String> arguments = new HashMap<Software, String>();
 	
-	private Settings()
+	private SettingsManager()
 	{
 		loadSettings();
 	}
 	
-	public static Settings getInstance()
+	public static SettingsManager getInstance()
 	{
 		if(instance == null)
 		{
-			instance = new Settings();
+			instance = new SettingsManager();
 		}
 	    return instance;
 	}
