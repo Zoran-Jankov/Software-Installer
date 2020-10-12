@@ -17,16 +17,17 @@ public class SettingsManager
 	public Ini loadInstallerSettings()
 	{
 		Ini settings = new Ini();
-		try
-		{
+		
 			ClassLoader classLoader = getClass().getClassLoader();
 	        InputStream inputStream = classLoader.getResourceAsStream("Installer-Settings.ini");
-	        settings.load(inputStream);
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
+	        try {
+				settings.load(inputStream);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		
 		
 		return settings;
 	}
