@@ -2,51 +2,46 @@ package com.zoran_jankov.software_installer.app;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class InstallerManager
 {
-	private static InstallerManager instance;
-	
-	private InstallerManager()
+	private InstallerSettings settings;
+
+	public InstallerManager()
+	{
+		settings = new InstallerSettings("Installer-Setting.ini");
+	}
+
+	private void install(String application)
+	{
+		String installerPath = settings.getLocalPath(application);
+		String arguments = settings.getArguments(application);
+
+		try
+		{
+			Process installer = new ProcessBuilder(installerPath, arguments).start();
+			installer.waitFor();
+		}
+		catch (IOException | InterruptedException e)
+		{
+			 e.printStackTrace();
+		}
+	}
+
+	public void download(String software)
 	{
 		
 	}
 	
-	public static InstallerManager getInstance()
+	public void startInstallation(Map<String, Boolean> softwareToInstall)
 	{
-		if(instance == null)
-		{
-			instance = new InstallerManager();
-		}
-	    return instance;
-	}
-	
-	private void install(Software software)
-	{
-		try
-		{
-			new ProcessBuilder(SettingsManager.getInstance().getLocalRepository(software), 
-							   SettingsManager.getInstance().getArguments(software)).start();							 
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-	}
-	
-	public void startInstallation(Map<Software, Boolean> softwareList)
-	{
-		for (Map.Entry<Software, Boolean> application : softwareList.entrySet())
+		for (Entry<String, Boolean> application : softwareToInstall.entrySet())
 		{
 			if(application.getValue())
 			{
 				install(application.getKey());
 			}
 		}
-	}
-	
-	public void update()
-	{
-		
 	}
 }
