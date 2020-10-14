@@ -12,7 +12,16 @@ public class InstallerSettings
 
 	public InstallerSettings(String path)
 	{
-		loadInstallerSettings(path);
+		InputStream inputStream = getClass().getResourceAsStream(path);
+
+		try
+		{
+			settings = new Ini(inputStream);
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	public Set<String> getSoftwareSet()
@@ -38,22 +47,5 @@ public class InstallerSettings
 	public String getDownloadURL(String application)
 	{
 		return settings.get(application, Option.DOWNLOAD_URL);
-	}
-
-	public Ini loadInstallerSettings(String path)
-	{
-		Ini settings = new Ini();
-		
-		ClassLoader classLoader = getClass().getClassLoader();
-	    InputStream inputStream = classLoader.getResourceAsStream(path);
-		try
-		{
-			settings.load(inputStream);
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-		return settings;
 	}
 }
