@@ -8,9 +8,9 @@ public class InstallerManager
 {
 	private InstallerSettings settings;
 
-	public InstallerManager()
+	public InstallerManager(InstallerSettings settings)
 	{
-		settings = new InstallerSettings("D:\\Programing\\Java\\Software Installer\\src\\main\\resources\\Installer-Setting.ini");
+		this.settings = settings;
 	}
 
 	private void install(String application)
