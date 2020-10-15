@@ -8,5 +8,6 @@
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry exported="true" kind="lib" path="ini4j-0.5.4-jdk14.jar"/>
+	<classpathentry exported="true" kind="lib" path="commons-io-2.8.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
