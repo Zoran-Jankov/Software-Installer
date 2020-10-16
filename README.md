@@ -1,5 +1,6 @@
 # Software-Installer
 
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![codebeat badge](https://codebeat.co/badges/9e33b692-fd45-4ca1-86dd-40dbe26420ef)](https://codebeat.co/projects/github-com-zoran-jankov-software-installer-main)
 [![BCH compliance](https://bettercodehub.com/edge/badge/Zoran-Jankov/Software-Installer?branch=main)](https://bettercodehub.com/)
 [![CodeFactor](https://www.codefactor.io/repository/github/zoran-jankov/software-installer/badge)](https://www.codefactor.io/repository/github/zoran-jankov/software-installer)
