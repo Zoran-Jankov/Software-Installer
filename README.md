@@ -21,3 +21,7 @@ This application has the same premise, you can select applications from the list
 Software architect and developer:  [Zoran Jankov](https://www.linkedin.com/in/zoran-jankov-b1054b196/)
 
 <a href="https://stackexchange.com/users/12947676/zoran-jankov"><img src="https://stackexchange.com/users/flair/12947676.png" width="208" height="58" alt="profile for Zoran Jankov on Stack Exchange, a network of free, community-driven Q&amp;A sites" title="profile for Zoran Jankov on Stack Exchange, a network of free, community-driven Q&amp;A sites" /></a>
+
+### Inspiration
+
+[**Ninite**](https://ninite.com/) website for installing and updating all your programs at once, and no toolbars, no clicking next. Just pick your apps and go.
