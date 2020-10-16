@@ -13,3 +13,11 @@ The application can be configured to download software installers from the inter
 It follows the example of [Ninite](https://ninite.com/) website that lets you generate a auto installer app that auto downloads applications and auto installs them on the local computer. You just select applications that you want to install and click on button **`Get Your Ninite`**.
 
 This application has the same premise, you can select applications from the list and install them on the computer, but you can configure the application to download the installer from the internet or from the local network location. This is a very important feature because in companies it is important to reduce internet traffic because of large number of user computers on the network. This way installer fetching is done inside local network, and installers are updated from the internet in only one location, on the server. Apart from the reduced internet traffic the other benefit of configuring installer fetcher to get installers from local network location is that the versions of the applications will be consistent across all company computers.
+
+## Credits
+
+### Author
+
+Software architect and developer:  [Zoran Jankov](https://www.linkedin.com/in/zoran-jankov-b1054b196/)
+
+<a href="https://stackexchange.com/users/12947676/zoran-jankov"><img src="https://stackexchange.com/users/flair/12947676.png" width="208" height="58" alt="profile for Zoran Jankov on Stack Exchange, a network of free, community-driven Q&amp;A sites" title="profile for Zoran Jankov on Stack Exchange, a network of free, community-driven Q&amp;A sites" /></a>
