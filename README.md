@@ -2,6 +2,7 @@
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![codebeat badge](https://codebeat.co/badges/9e33b692-fd45-4ca1-86dd-40dbe26420ef)](https://codebeat.co/projects/github-com-zoran-jankov-software-installer-main)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/4a93162b7ae64d078de086df2c4ad066)](https://www.codacy.com/gh/Zoran-Jankov/Software-Installer/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Zoran-Jankov/Software-Installer&amp;utm_campaign=Badge_Grade)
 [![CodeFactor](https://www.codefactor.io/repository/github/zoran-jankov/software-installer/badge)](https://www.codefactor.io/repository/github/zoran-jankov/software-installer)
 [![BCH compliance](https://bettercodehub.com/edge/badge/Zoran-Jankov/Software-Installer?branch=main)](https://bettercodehub.com/)
 
@@ -24,4 +25,4 @@ Software architect and developer:  [Zoran Jankov](https://www.linkedin.com/in/zo
 
 ### Inspiration
 
-[**Ninite**](https://ninite.com/) website for installing and updating all your programs at once, and no toolbars, no clicking next. Just pick your apps and go.
+[**Ninite**](https://ninite.com/) website for installing and updating all your programs at once, and no toolbars, no clicking next. Just pick your apps and go. It was founded by [Patrick Swieskowski](https://www.crunchbase.com/person/patrick-swieskowski) and [Sascha Kuzins](https://www.crunchbase.com/person/sascha-kuzins).
