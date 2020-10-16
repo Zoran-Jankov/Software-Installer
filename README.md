@@ -1,5 +1,9 @@
 # Software-Installer
 
+[![codebeat badge](https://codebeat.co/badges/9e33b692-fd45-4ca1-86dd-40dbe26420ef)](https://codebeat.co/projects/github-com-zoran-jankov-software-installer-main)
+[![BCH compliance](https://bettercodehub.com/edge/badge/Zoran-Jankov/Software-Installer?branch=main)](https://bettercodehub.com/)
+[![CodeFactor](https://www.codefactor.io/repository/github/zoran-jankov/software-installer/badge)](https://www.codefactor.io/repository/github/zoran-jankov/software-installer)
+
 ## Description  
 **Software Installer** application is a convenient application for automated software installation and update on Windows platforms. It is a ideal tool for all system administrators.
 
