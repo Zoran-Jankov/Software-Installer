@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Test;
 
 import com.zoran_jankov.software_installer.app.InstallerSettings;
 
-class InstallerSettingsTest
+public class InstallerSettingsTest
 {
-	static final String PATH = "/Installer-Settings-Test.ini";
+	private static final String PATH = "/Installer-Settings-Test.ini";
 	
 	InstallerSettings installerSettings = new InstallerSettings(PATH);
 	
