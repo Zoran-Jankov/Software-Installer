@@ -10,7 +10,7 @@ public class InstallerSettingsTest
 {
 	private static final String PATH = "/Installer-Settings-Test.ini";
 	
-	InstallerSettings installerSettings = new InstallerSettings(PATH);
+	private InstallerSettings installerSettings = new InstallerSettings(PATH);
 	
 	@Test
 	public void getArgumentsTest()
