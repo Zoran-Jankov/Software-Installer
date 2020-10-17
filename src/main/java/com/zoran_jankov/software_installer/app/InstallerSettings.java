@@ -2,7 +2,6 @@ package com.zoran_jankov.software_installer.app;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Set;
 
 import org.ini4j.Ini;
 
@@ -22,11 +21,6 @@ public class InstallerSettings
 		{
 			e.printStackTrace();
 		}
-	}
-
-	public Set<String> getSoftwareSet()
-	{
-		return settings.keySet();
 	}
 
 	public String getArguments(String application)
