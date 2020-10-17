@@ -1,46 +1,48 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.zoran_jankov.software_installer</groupId>
-  <artifactId>Software-Installer</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>Software-Installer</name>
-  <build>
-    <plugins>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
-        <configuration>
-          <release>14</release>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-  
-  <dependencies>
-  	<dependency>
-    <groupId>com.miglayout</groupId>
-    <artifactId>miglayout-core</artifactId>
-    <version>5.2</version>
-  </dependency>
-
-<dependency>
-    <groupId>com.miglayout</groupId>
-    <artifactId>miglayout-swing</artifactId>
-    <version>5.2</version>
-</dependency>
-
-<dependency>
-    <groupId>org.ini4j</groupId>
-    <artifactId>ini4j</artifactId>
-    <version>0.5.4</version>
-</dependency>
-
-<dependency>
-    <groupId>commons-io</groupId>
-    <artifactId>commons-io</artifactId>
-    <version>2.8.0</version>
-</dependency>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.zoran_jankov.software_installer</groupId>
+	<artifactId>Software-Installer</artifactId>
+  	<version>0.0.1-SNAPSHOT</version>
+  	<name>Software-Installer</name>
   	
-  </dependencies>
+  	<build>
+    	<plugins>
+      		<plugin>
+        		<artifactId>maven-compiler-plugin</artifactId>
+        		<version>3.8.1</version>
+        		<configuration>
+          			<release>14</release>
+        		</configuration>
+      		</plugin>
+    	</plugins>
+  	</build>
+  
+  	<dependencies>
+  	
+  		<dependency>
+  			<groupId>com.miglayout</groupId>
+    		<artifactId>miglayout-core</artifactId>
+    		<version>5.2</version>
+  		</dependency>
+
+		<dependency>
+    		<groupId>com.miglayout</groupId>
+    		<artifactId>miglayout-swing</artifactId>
+    		<version>5.2</version>
+		</dependency>
+
+		<dependency>
+    		<groupId>org.ini4j</groupId>
+    		<artifactId>ini4j</artifactId>
+    		<version>0.5.4</version>
+		</dependency>
+
+		<dependency>
+    		<groupId>commons-io</groupId>
+    		<artifactId>commons-io</artifactId>
+   			<version>2.8.0</version>
+		</dependency>
+  	
+	</dependencies>
   
 </project>
