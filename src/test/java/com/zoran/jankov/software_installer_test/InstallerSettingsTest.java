@@ -9,8 +9,12 @@ import com.zoran_jankov.software_installer.app.InstallerSettings;
 public class InstallerSettingsTest
 {
 	private static final String PATH = "/Installer-Settings-Test.ini";
+	private InstallerSettings installerSettings = InstallerSettings.getInstance();
 	
-	private InstallerSettings installerSettings = new InstallerSettings(PATH);
+	public InstallerSettingsTest()
+	{
+		InstallerSettings.getInstance().loadSettings(PATH);
+	}
 	
 	@Test
 	public void getArgumentsTest()

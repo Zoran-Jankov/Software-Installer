@@ -7,9 +7,25 @@ import org.ini4j.Ini;
 
 public class InstallerSettings
 {
+	private static InstallerSettings instance;
+	
 	private Ini settings;
 
-	public InstallerSettings(String path)
+    public static synchronized InstallerSettings getInstance()
+    {
+        if(instance == null)
+        {
+            instance = new InstallerSettings();
+        }
+        return instance;
+    }
+
+	private InstallerSettings()
+	{
+		
+	}
+	
+	public void loadSettings(String path)
 	{
 		InputStream inputStream = getClass().getResourceAsStream(path);
 
@@ -41,5 +57,10 @@ public class InstallerSettings
 	public String getDownloadURL(String application)
 	{
 		return settings.get(application, Option.DOWNLOAD_URL);
+	}
+
+	public String getIconPath(String application)
+	{
+		return settings.get(application, Option.ICON);
 	}
 }

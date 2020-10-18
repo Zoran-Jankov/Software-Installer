@@ -11,12 +11,7 @@ import org.apache.commons.io.FileUtils;
 
 public class InstallerManager
 {
-	private InstallerSettings settings;
-
-	public InstallerManager(InstallerSettings settings)
-	{
-		this.settings = settings;
-	}
+	private InstallerSettings settings = InstallerSettings.getInstance();
 
 	private void install(String application)
 	{
