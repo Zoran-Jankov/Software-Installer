@@ -15,6 +15,12 @@ It follows the example of [Ninite](https://ninite.com/) website that lets you ge
 
 This application has the same premise, you can select applications from the list and install them on the computer, but you can configure the application to download the installer from the internet or from the local network location. This is a very important feature because in companies it is important to reduce internet traffic because of large number of user computers on the network. This way installer fetching is done inside local network, and installers are updated from the internet in only one location, on the server. Apart from the reduced internet traffic the other benefit of configuring installer fetcher to get installers from local network location is that the versions of the applications will be consistent across all company computers.
 
+## Licence
+
+[***GNU General Public License Version 3***](https://www.gnu.org/licenses/gpl-3.0)
+
+[![License: GPL v3](https://www.gnu.org/graphics/gplv3-127x51.png)](https://www.gnu.org/licenses/gpl-3.0)
+
 ## Credits
 
 ### Author
