@@ -1,6 +1,6 @@
 # Software-Installer
 
-[![Java](https://img.shields.io/badge/Java-14-orange)](https://docs.oracle.com/en/java/javase/14/)
+[![made-with-powershell](https://img.shields.io/badge/PowerShell-1f425f?logo=Powershell)](https://microsoft.com/PowerShell)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![codebeat badge](https://codebeat.co/badges/9e33b692-fd45-4ca1-86dd-40dbe26420ef)](https://codebeat.co/projects/github-com-zoran-jankov-software-installer-main)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/4a93162b7ae64d078de086df2c4ad066)](https://www.codacy.com/gh/Zoran-Jankov/Software-Installer/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Zoran-Jankov/Software-Installer&amp;utm_campaign=Badge_Grade)
