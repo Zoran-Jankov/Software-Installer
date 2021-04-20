@@ -3,21 +3,27 @@ $SoftwareList = Import-Csv -Path '.\SoftwareList.csv' -Delimiter ';' -Encoding '
 $AppSelection = @{}
 
 $ApplicationTitle = "Software Installer"
-$LabelBackColor = "#003f9a"
+$ButtonBackgroundColor = "#003F9A"
 $FormBackgroundColor = "#468FEA"
 $FormForegroundColor = "#FFFFFF"
 
-$NumberOfColumns = 3
 $MarginSize = 25
+$NumberOfColumns = 4
+$ComboBoxWidth = 150
+$ComboBoxHeight = 25
 $ColumnWidth = 150
-$InstallButtonWidth = 120
-$InstallButtonHeight = 40
+$ButtonWidth = 120
+$ButtonHeight = 35
 
-$MainFormWidth = ($MarginSize * 2) + ($NumberOfColumns * 150)
-$MainFormHeight = (($SoftwareList | Measure-Object).Count / $NumberOfColumns) * $MarginSize + ($MarginSize * 3) + $InstallButtonHeight
-if (($SoftwareList | Measure-Object).Count % $NumberOfColumns -lt 0) {
-    $MainFormHeight += $MarginSize
+if ($SoftwareList.Count % $NumberOfColumns -gt 0) {
+    $NumberOfRows = ($SoftwareList.Count / $NumberOfColumns) + 1
 }
+else {
+    $NumberOfRows = $SoftwareList.Count / $NumberOfColumns
+}
+
+$MainFormWidth = ($MarginSize * 2) + ($NumberOfColumns * $ColumnWidth)
+$MainFormHeight = ($NumberOfRows * $ComboBoxHeight) + ($MarginSize * 2) + $ButtonHeight
 
 #-----------------------------------------------------------[Functions]------------------------------------------------------------
 
@@ -44,7 +50,8 @@ $ColumnCounter = 1
 
 foreach ($Application in $SoftwareList) {
     $SoftwareCheckbox = New-Object System.Windows.Forms.CheckBox
-    $SoftwareCheckbox.AutoSize = $true
+    $SoftwareCheckbox.AutoSize = $false
+    $SoftwareCheckbox.Size = New-Object System.Drawing.Size($ComboBoxWidth, $ComboBoxHeight)
     $SoftwareCheckbox.Location = New-Object System.Drawing.Size($XAxisOffset, $YAxisOffset)
     $SoftwareCheckbox.Text = $Application.Name
     $SoftwareCheckbox.Checked = $false
@@ -57,7 +64,7 @@ foreach ($Application in $SoftwareList) {
     }
     else {
         $XAxisOffset = $MarginSize
-        $YAxisOffset += $MarginSize
+        $YAxisOffset += $ComboBoxHeight
         $ColumnCounter = 1
     }
     $AppSelection.Add($Application.Name, $SoftwareCheckbox)
@@ -65,11 +72,11 @@ foreach ($Application in $SoftwareList) {
 
 $InstallButton = New-Object system.Windows.Forms.Button
 $InstallButton.Text = "Install"
-$InstallButton.Width = $InstallButtonWidth
-$InstallButton.Height = $InstallButtonHeight
-$InstallButton.Location = New-Object System.Drawing.Point((($MainFormWidth - $InstallButtonWidth) / 2), ($MainFormHeight - $InstallButtonHeight- $MarginSize))
+$InstallButton.Width = $ButtonWidth
+$InstallButton.Height = $ButtonHeight
+$InstallButton.Location = New-Object System.Drawing.Point((($MainFormWidth - $ButtonWidth) / 2), ($MainFormHeight - $ButtonHeight- $MarginSize))
 $InstallButton.Font = New-Object System.Drawing.Font('Microsoft Sans Serif',10,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
-$InstallButton.BackColor = $LabelBackColor
+$InstallButton.BackColor = $ButtonBackgroundColor
 
 $MainForm.controls.AddRange(@(
     $InstallButton
