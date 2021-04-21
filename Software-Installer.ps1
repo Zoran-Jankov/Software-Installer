@@ -1,6 +1,7 @@
 #---------------------------------------------------------[Initialisations]--------------------------------------------------------
 $SoftwareList = Import-Csv -Path '.\SoftwareList.csv' -Delimiter ';' -Encoding 'UTF8'
-$AppSelection = @{}
+[hashtable]$AppSelection = @{}
+[hashtable]$AppSize = @{}
 
 $ApplicationTitle = "Software Installer"
 $ButtonBackgroundColor = "#003F9A"
@@ -12,6 +13,7 @@ $NumberOfColumns = 4
 $ComboBoxWidth = 150
 $ComboBoxHeight = 25
 $ColumnWidth = 150
+$ProgressBarHeight = 25
 $ButtonWidth = 120
 $ButtonHeight = 35
 
@@ -21,9 +23,11 @@ if ($SoftwareList.Count % $NumberOfColumns -gt 0) {
 else {
     $NumberOfRows = $SoftwareList.Count / $NumberOfColumns
 }
-
-$MainFormWidth = ($MarginSize * 2) + ($NumberOfColumns * $ColumnWidth)
-$MainFormHeight = ($NumberOfRows * $ComboBoxHeight) + ($MarginSize * 2) + $ButtonHeight
+$ComboBoxBlockWidth = $NumberOfColumns * $ColumnWidth
+$ComboBoxBlockHeight = $NumberOfRows * $ComboBoxHeight
+$MainFormWidth = ($MarginSize * 2) + $ComboBoxBlockWidth
+$MainFormHeight = $ComboBoxBlockHeight + ($MarginSize * 4) + $ButtonHeight
+$ProgressBarPosition = $ComboBoxBlockHeight + $MarginSize
 
 #-----------------------------------------------------------[Functions]------------------------------------------------------------
 
@@ -55,7 +59,7 @@ foreach ($Application in $SoftwareList) {
     $SoftwareCheckbox.Location = New-Object System.Drawing.Size($XAxisOffset, $YAxisOffset)
     $SoftwareCheckbox.Text = $Application.Name
     $SoftwareCheckbox.Checked = $false
-    $SoftwareCheckbox.Font = New-Object System.Drawing.Font('Microsoft Sans Serif',10,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+    $SoftwareCheckbox.Font = New-Object System.Drawing.Font('Microsoft Sans Serif', 10, [System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
     $MainForm.controls.Add($SoftwareCheckbox)
 
     if ($ColumnCounter -lt $NumberOfColumns) {
@@ -68,26 +72,33 @@ foreach ($Application in $SoftwareList) {
         $ColumnCounter = 1
     }
     $AppSelection.Add($Application.Name, $SoftwareCheckbox)
+    $AppSize.Add($Application.Name, (Get-Item -Path $Application.Path).Length)
 }
+
+$ProgressBar = New-Object System.Windows.Forms.ProgressBar
+$ProgressBar.Location = New-Object System.Drawing.Point(25, $ProgressBarPosition)
+$ProgressBar.Size = New-Object System.Drawing.Size($ComboBoxBlockWidth, $ProgressBarHeight)
+$ProgressBar.Style = "Continuous"
+$ProgressBar.Minimum = 0
+$ProgressBar.Maximum = 10000
+$MainForm.Controls.Add($ProgressBar)
 
 $InstallButton = New-Object system.Windows.Forms.Button
 $InstallButton.Text = "Install"
 $InstallButton.Width = $ButtonWidth
 $InstallButton.Height = $ButtonHeight
-$InstallButton.Location = New-Object System.Drawing.Point((($MainFormWidth - $ButtonWidth) / 2), ($MainFormHeight - $ButtonHeight- $MarginSize))
-$InstallButton.Font = New-Object System.Drawing.Font('Microsoft Sans Serif',10,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
+$InstallButton.Location = New-Object System.Drawing.Point((($MainFormWidth - $ButtonWidth) / 2), ($MainFormHeight - $ButtonHeight - $MarginSize))
+$InstallButton.Font = New-Object System.Drawing.Font('Microsoft Sans Serif', 10, [System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 $InstallButton.BackColor = $ButtonBackgroundColor
+$MainForm.controls.Add($InstallButton)
 
-$MainForm.controls.AddRange(@(
-    $InstallButton
-    ))
-
-$InstallButton.Add_Click({
-    foreach ($Application in $SoftwareList) {
-        if ($AppSelection[$Application.Name].Checked -eq $true) {
-            Start-Process -FilePath $Application.Path -ArgumentList $Application.Arguments
+$InstallButton.Add_Click( {
+        foreach ($Application in $SoftwareList) {
+            if ($AppSelection[$Application.Name].Checked -eq $true) {
+                Start-Process -FilePath $Application.Path -ArgumentList $Application.Arguments
+                $ProgressBar.Value
+            }
         }
-    }
-})  
+    })  
 
 [void]$MainForm.ShowDialog()
