@@ -15,6 +15,7 @@ $NumberOfColumns = 4
 $CheckboxWidth = 150
 $ComboBoxHeight = 25
 $ColumnWidth = 150
+$TextBoxHeight = 150
 $ProgressBarHeight = 25
 $ButtonWidth = 120
 $ButtonHeight = 35
@@ -27,9 +28,11 @@ else {
 }
 $ComboBoxBlockWidth = $NumberOfColumns * $ColumnWidth
 $ComboBoxBlockHeight = $NumberOfRows * $ComboBoxHeight
-$MainFormWidth = ($MarginSize * 2) + $ComboBoxBlockWidth
-$MainFormHeight = $ComboBoxBlockHeight + ($MarginSize * 4) + $ButtonHeight
-$ProgressBarPosition = $ComboBoxBlockHeight + $MarginSize
+$MainFormWidth = $ComboBoxBlockWidth + ($MarginSize * 2)
+$MainFormHeight = $ComboBoxBlockHeight + $TextBoxHeight + $ProgressBarHeight + $ButtonHeight + ($MarginSize * 4)
+$TextBoxPosition = $ComboBoxBlockHeight + $MarginSize
+$ProgressBarPosition = $TextBoxPosition+ $MarginSize + $TextBoxHeight
+$ButtonPosition = $ProgressBarPosition + $MarginSize + $ProgressBarHeight
 
 #-----------------------------------------------------------[Functions]------------------------------------------------------------
 
@@ -79,8 +82,17 @@ foreach ($Application in $SoftwareList) {
     $AppSelection.Add($Application.Name, $SoftwareCheckbox)
 }
 
+$TextBox = New-Object System.Windows.Forms.TextBox
+$TextBox.Location = New-Object System.Drawing.Point($MarginSize, $TextBoxPosition)
+$TextBox.Size = New-Object System.Drawing.Size($ComboBoxBlockWidth, $TextBoxHeight)
+$TextBox.AutoSize = $false
+$TextBox.Multiline = $true
+$TextBox.Scrollbars = "Vertical"
+$TextBox.ReadOnly = $true
+$MainForm.Controls.Add($TextBox)
+
 $ProgressBar = New-Object System.Windows.Forms.ProgressBar
-$ProgressBar.Location = New-Object System.Drawing.Point(25, $ProgressBarPosition)
+$ProgressBar.Location = New-Object System.Drawing.Point($MarginSize, $ProgressBarPosition)
 $ProgressBar.Size = New-Object System.Drawing.Size($ComboBoxBlockWidth, $ProgressBarHeight)
 $ProgressBar.Style = "Continuous"
 $ProgressBar.Minimum = 0
@@ -91,7 +103,7 @@ $InstallButton = New-Object system.Windows.Forms.Button
 $InstallButton.Text = "Install"
 $InstallButton.Width = $ButtonWidth
 $InstallButton.Height = $ButtonHeight
-$InstallButton.Location = New-Object System.Drawing.Point((($MainFormWidth - $ButtonWidth) / 2), ($MainFormHeight - $ButtonHeight - $MarginSize))
+$InstallButton.Location = New-Object System.Drawing.Point((($MainFormWidth - $ButtonWidth) / 2), $ButtonPosition)
 $InstallButton.Font = New-Object System.Drawing.Font('Microsoft Sans Serif', 10, [System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 $InstallButton.BackColor = $ButtonBackgroundColor
 $MainForm.controls.Add($InstallButton)
@@ -108,11 +120,13 @@ foreach ($Application in $SoftwareList) {
     }
 }
 
-$InstallButton.Add_Click( {
+$InstallButton.Add_Click({
         foreach ($Application in $SoftwareList) {
             if ($AppSelection[$Application.Name].Checked -eq $true) {
-                Start-Process -FilePath $Application.Path -ArgumentList $Application.Arguments
+                $TextBox.Text += ("Installing " + $Application.Name + " ...`r`n")
+                Start-Process -FilePath $Application.Path -ArgumentList $Application.Arguments | Wait-Process
                 $ProgressBar.Value += $AppPresent[$Application.Name]
+                $TextBox.Text += ($Application.Name + "application installed `r`n")
             }
         }
     })  
