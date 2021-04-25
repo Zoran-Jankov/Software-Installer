@@ -31,7 +31,7 @@ $ComboBoxBlockHeight = $NumberOfRows * $ComboBoxHeight
 $MainFormWidth = $ComboBoxBlockWidth + ($MarginSize * 2)
 $MainFormHeight = $ComboBoxBlockHeight + $TextBoxHeight + $ProgressBarHeight + $ButtonHeight + ($MarginSize * 4)
 $TextBoxPosition = $ComboBoxBlockHeight + $MarginSize
-$ProgressBarPosition = $TextBoxPosition+ $MarginSize + $TextBoxHeight
+$ProgressBarPosition = $TextBoxPosition + $MarginSize + $TextBoxHeight
 $ButtonPosition = $ProgressBarPosition + $MarginSize + $ProgressBarHeight
 
 #-----------------------------------------------------------[Functions]------------------------------------------------------------
@@ -95,8 +95,6 @@ $ProgressBar = New-Object System.Windows.Forms.ProgressBar
 $ProgressBar.Location = New-Object System.Drawing.Point($MarginSize, $ProgressBarPosition)
 $ProgressBar.Size = New-Object System.Drawing.Size($ComboBoxBlockWidth, $ProgressBarHeight)
 $ProgressBar.Style = "Continuous"
-$ProgressBar.Minimum = 0
-$ProgressBar.Maximum = 100
 $MainForm.Controls.Add($ProgressBar)
 
 $InstallButton = New-Object system.Windows.Forms.Button
@@ -108,29 +106,22 @@ $InstallButton.Font = New-Object System.Drawing.Font('Microsoft Sans Serif', 10,
 $InstallButton.BackColor = $ButtonBackgroundColor
 $MainForm.controls.Add($InstallButton)
 
-foreach ($Application in $SoftwareList) {
-    if ($AppSelection[$Application.Name].Checked -eq $true) {
-        $SizeSum += $AppSize[$Application.Name]
-    }
-}
-
-foreach ($Application in $SoftwareList) {
-    if ($AppSelection[$Application.Name].Checked -eq $true) {
-        $AppPresent[$Application.Name] = ($AppSize[$Application.Name] / $SizeSum) * 100
-    }
-}
-
 $InstallButton.Add_Click({
+        $TextBox.Text += "Software installation starting . . .`r`n"
         foreach ($Application in $SoftwareList) {
-            $Progress = 0
-            if ($AppSelection[$Application.Name].Checked -eq $true) {
+            if ($AppSelection[$Application.Name].Checked) {
+                $SizeSum += $AppSize[$Application.Name]
+            }
+        }
+        foreach ($Application in $SoftwareList) {
+            if ($AppSelection[$Application.Name].Checked) {
                 $TextBox.Text += ("Installing " + $Application.Name + " . . .`r`n")
-                Start-Process -FilePath $Application.Path -ArgumentList $Application.Arguments | Get-Process | Wait-Process
-                $Progress += $AppPresent[$Application.Name]
-                $ProgressBar.Value = $Progress
+                Start-Process -FilePath $Application.Path -ArgumentList $Application.Arguments -PassThru | Wait-Process
+                $ProgressBar.Value += ($AppSize[$Application.Name] / $SizeSum) * 100
                 $TextBox.Text += ($Application.Name + " application installed`r`n")
             }
         }
+        $TextBox.Text += "Software installation completed`r`n"
     })  
 
 [void]$MainForm.ShowDialog()
