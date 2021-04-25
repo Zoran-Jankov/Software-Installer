@@ -11,10 +11,10 @@ $FormBackgroundColor = "#468FEA"
 $FormForegroundColor = "#FFFFFF"
 
 $MarginSize = 25
-$NumberOfColumns = 4
-$CheckboxWidth = 150
+$NumberOfColumns = 3
+$CheckboxWidth = 200
 $ComboBoxHeight = 25
-$ColumnWidth = 150
+$ColumnWidth = 200
 $TextBoxHeight = 150
 $ProgressBarHeight = 25
 $ButtonWidth = 120
@@ -96,7 +96,7 @@ $ProgressBar.Location = New-Object System.Drawing.Point($MarginSize, $ProgressBa
 $ProgressBar.Size = New-Object System.Drawing.Size($ComboBoxBlockWidth, $ProgressBarHeight)
 $ProgressBar.Style = "Continuous"
 $ProgressBar.Minimum = 0
-$ProgressBar.Maximum = 100000
+$ProgressBar.Maximum = 100
 $MainForm.Controls.Add($ProgressBar)
 
 $InstallButton = New-Object system.Windows.Forms.Button
@@ -116,17 +116,19 @@ foreach ($Application in $SoftwareList) {
 
 foreach ($Application in $SoftwareList) {
     if ($AppSelection[$Application.Name].Checked -eq $true) {
-        $AppPresent[$Application.Name] = ($AppSize[$Application.Name] / $SizeSum) * 100000
+        $AppPresent[$Application.Name] = ($AppSize[$Application.Name] / $SizeSum) * 100
     }
 }
 
 $InstallButton.Add_Click({
         foreach ($Application in $SoftwareList) {
+            $Progress = 0
             if ($AppSelection[$Application.Name].Checked -eq $true) {
-                $TextBox.Text += ("Installing " + $Application.Name + " ...`r`n")
-                Start-Process -FilePath $Application.Path -ArgumentList $Application.Arguments | Wait-Process
-                $ProgressBar.Value += $AppPresent[$Application.Name]
-                $TextBox.Text += ($Application.Name + "application installed `r`n")
+                $TextBox.Text += ("Installing " + $Application.Name + " . . .`r`n")
+                Start-Process -FilePath $Application.Path -ArgumentList $Application.Arguments | Get-Process | Wait-Process
+                $Progress += $AppPresent[$Application.Name]
+                $ProgressBar.Value = $Progress
+                $TextBox.Text += ($Application.Name + " application installed`r`n")
             }
         }
     })  

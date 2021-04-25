@@ -1,15 +1,6 @@
 Name;Path;Arguments
-7-Zip;D:\Program Installers\7-Zip\7z1900.exe;/S
-Java;dsd;dsd;
-fadsfds;dfds;dfds;
-dfdsaf;
-fdf;dfd;
-fdfd;
-dfdsfds;fadsfdssdfds;
-sfdsf;
-dsfsf;
-DFsdfdsf;
-gkjghsjgjsl;
-Mozilla Firefox;
-fdsjfdjfj;
-dfds;
+7-Zip;\\DS2\Software Installers\7-Zip\setup.exe;/S
+UltraVNC (Server Only);\\DS2\Software Installers\UltraVNC\setup.exe;/silent /loadinf=server.inf
+UltraVNC (Viewer & Server);\\DS2\Software Installers\UltraVNC\setup.exe;/silent /loadinf=viewer.inf
+Mozilla Firefox;\\ds2\Software Installers\Firefox\setup.exe;/S
+Notepad++;\\ds2\Software Installers\Notepad++\setup.exe;/S
