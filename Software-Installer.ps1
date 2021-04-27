@@ -95,6 +95,7 @@ $ProgressBar = New-Object System.Windows.Forms.ProgressBar
 $ProgressBar.Location = New-Object System.Drawing.Point($MarginSize, $ProgressBarPosition)
 $ProgressBar.Size = New-Object System.Drawing.Size($ComboBoxBlockWidth, $ProgressBarHeight)
 $ProgressBar.Style = "Continuous"
+$ProgressBar.MarqueeAnimationSpeed
 $MainForm.Controls.Add($ProgressBar)
 
 $InstallButton = New-Object system.Windows.Forms.Button
@@ -116,8 +117,10 @@ $InstallButton.Add_Click({
         foreach ($Application in $SoftwareList) {
             if ($AppSelection[$Application.Name].Checked) {
                 $TextBox.Text += ("Installing " + $Application.Name + " . . .`r`n")
-                Start-Process -FilePath $Application.Path -ArgumentList $Application.Arguments -PassThru | Wait-Process
+                $ProgressBar.Capture
                 $ProgressBar.Value += ($AppSize[$Application.Name] / $SizeSum) * 100
+                Start-Process -FilePath $Application.Path -ArgumentList $Application.Arguments -PassThru | Wait-Process
+                
                 $TextBox.Text += ($Application.Name + " application installed`r`n")
             }
         }
