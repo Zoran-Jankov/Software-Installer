@@ -2,7 +2,6 @@
 $SoftwareList = Import-Csv -Path '.\SoftwareList.csv' -Delimiter ';' -Encoding 'UTF8'
 [hashtable]$AppSelection = @{}
 [hashtable]$AppSize = @{}
-[hashtable]$AppPresent = @{}
 $SizeSum = 0
 
 $ApplicationTitle = "Software Installer"
